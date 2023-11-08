@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace GingerBreadCalculator
 {
-    public interface WindowInterface
+    public interface IWindowInterface
     {
-        void output(string _text);
+        void Output(string _text);
+
+        void Clear();
+
+        void OperationOutput(string _text);
     }
 }

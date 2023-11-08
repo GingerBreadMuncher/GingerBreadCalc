@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 
 namespace GingerBreadCalculator
 {
-    public partial class MainWindow : Window, WindowInterface
+    public partial class MainWindow : Window, IWindowInterface
     {
         public MainWindow()
         {
@@ -31,14 +31,6 @@ namespace GingerBreadCalculator
         double temp = 0;
         bool resultGiven = false;
 
-        private void Clear()
-        {
-            output = "";
-            temp = 0;
-            OutputTextBlock.Text = output;
-            operationOutput = "";
-            OperationTextBlock.Text = operationOutput;
-        }
 
         #region Button Events
         private void Btn_Click(object sender, RoutedEventArgs e)
@@ -101,7 +93,7 @@ namespace GingerBreadCalculator
             switch (operation)
             {
                 case "PlusBtn":
-                    OperationBtn(temp + double.Parse(output));
+                    CalcFunctions.DoOperation(temp + double.Parse(output)), this;
                     break;
 
                 case "MinusBtn":
@@ -129,17 +121,24 @@ namespace GingerBreadCalculator
 
         #endregion
 
-        void OperationBtn(double _outputTemp)
+
+        public void Output(string _text)
         {
-            operationOutput = temp + " " + lastOperation + " " + output;
-            OperationTextBlock.Text = operationOutput;
-            output = _outputTemp.ToString();
-            OutputTextBlock.Text = output;
+            OutputTextBlock.Text = _text;
         }
 
-        void WindowInterface.output(string _text)
+        public void Clear()
         {
-            throw new NotImplementedException();
+            output = "";
+            temp = 0;
+            OutputTextBlock.Text = output;
+            operationOutput = "";
+            OperationTextBlock.Text = operationOutput;
+        }
+
+        public void OperationOutput(string _text)
+        {
+            OperationTextBlock.Text = _text;
         }
     }
 }

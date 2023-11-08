@@ -10,14 +10,14 @@ namespace GingerBreadCalculator
 {
     public partial class CalcFunctions
     {
-        string operationOutput = "";
-        string output = "";
-        string operation = "";
-        string lastOperation = "";
-        double temp = 0;
-        bool resultGiven = false;
+        public static string operationOutput = "";
+        public static string output = "";
+        public static string operation = "";
+        public static string lastOperation = "";
+        public static double temp = 0;
+        public static bool resultGiven = false;
 
-        private void SelectNumber(string _name, string _value)
+        public static void SelectNumber(string _name, string _value, IWindowInterface _windowInterface)
         {
             string name = _name;
             
@@ -27,19 +27,18 @@ namespace GingerBreadCalculator
             if (resultGiven == false)
             {
                 output += value;
-                OutputTextBlock.Text = output;
             }
             else
             {
-                Clear();
+                _windowInterface.Clear();
                 output = value.ToString();
-                OutputTextBlock.Text = _text;
                 resultGiven = false;
             }
+            _windowInterface.Output(output);
 
             if (name == "ClearBtn")
             {
-                Clear();
+                _windowInterface.Clear();
             }
 
             if (output == "0")
@@ -48,17 +47,12 @@ namespace GingerBreadCalculator
             }
         }
 
-        private void MathOperation(object sender, RoutedEventArgs e)
+        public static void MathOperation(string _name, string _value, IWindowInterface _windowInterface)
         {
-            string name = ((Button)sender).Name;
+            string name = _name;
 
-            string value = ((Button)sender).Content.ToString();
+            string value = _value;
 
-            void MathOp()
-            {
-                operationOutput = temp + " " + value + " ";
-                OperationTextBlock.Text = operationOutput;
-            }
 
             lastOperation = value;
 
@@ -67,17 +61,18 @@ namespace GingerBreadCalculator
                 temp = double.Parse(output);
                 output = "";
                 operation = name;
-                MathOp();
+                operationOutput = temp + " " + value + " ";
+                _windowInterface.OperationOutput(operationOutput);
                 resultGiven = false;
             }
         }
 
-        void OperationBtn(double _outputTemp)
+        public static void DoOperation(double _outputTemp, IWindowInterface _windowInterface)
         {
             operationOutput = temp + " " + lastOperation + " " + output;
-            OperationTextBlock.Text = operationOutput;
+            _windowInterface.OperationOutput(operationOutput);
             output = _outputTemp.ToString();
-            OutputTextBlock.Text = output;
+            _windowInterface.Output(output);
         }
     }
 }
