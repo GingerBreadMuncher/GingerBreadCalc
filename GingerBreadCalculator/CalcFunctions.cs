@@ -17,11 +17,11 @@ namespace GingerBreadCalculator
         double temp = 0;
         bool resultGiven = false;
 
-        private void Btn_Click(object sender, RoutedEventArgs e)
+        private void SelectNumber(string _name, string _value)
         {
-            string name = ((Button)sender).Name;
-
-            string value = ((Button)sender).Content.ToString();
+            string name = _name;
+            
+            string value = _value;
 
 
             if (resultGiven == false)
@@ -33,7 +33,7 @@ namespace GingerBreadCalculator
             {
                 Clear();
                 output = value.ToString();
-                OutputTextBlock.Text = output;
+                OutputTextBlock.Text = _text;
                 resultGiven = false;
             }
 

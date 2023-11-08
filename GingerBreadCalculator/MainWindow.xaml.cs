@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 
 namespace GingerBreadCalculator
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, WindowInterface
     {
         public MainWindow()
         {
@@ -135,6 +135,11 @@ namespace GingerBreadCalculator
             OperationTextBlock.Text = operationOutput;
             output = _outputTemp.ToString();
             OutputTextBlock.Text = output;
+        }
+
+        void WindowInterface.output(string _text)
+        {
+            throw new NotImplementedException();
         }
     }
 }
