@@ -10,8 +10,6 @@ namespace GingerBreadCalculator
     {
         void Output(string _text);
 
-        void Clear();
-
         void OperationOutput(string _text);
     }
 }

@@ -24,12 +24,6 @@ namespace GingerBreadCalculator
             InitializeComponent();
         }
 
-        string operationOutput = "";
-        string output = "";
-        string operation = "";
-        string lastOperation = "";
-        double temp = 0;
-        bool resultGiven = false;
 
 
         #region Button Events
@@ -39,29 +33,7 @@ namespace GingerBreadCalculator
 
             string value = ((Button)sender).Content.ToString();
 
-
-            if (resultGiven == false)
-            {
-                output += value;
-                OutputTextBlock.Text = output;
-            }
-            else
-            {
-                Clear();
-                output = value.ToString();
-                OutputTextBlock.Text = output;
-                resultGiven = false;
-            }
-
-            if (name == "ClearBtn")
-            {
-                Clear();
-            }
-
-            if (output == "0")
-            {
-                resultGiven = true;
-            }
+            CalcFunctions.SelectNumber(name, value, this);
         }
 
         private void MathOperation(object sender, RoutedEventArgs e)
@@ -70,45 +42,12 @@ namespace GingerBreadCalculator
 
             string value = ((Button)sender).Content.ToString();
 
-            lastOperation = value;
-
-            void MathOp()
-            {
-                operationOutput = temp + " " + value + " ";
-                OperationTextBlock.Text = operationOutput;
-            }
-
-            if (output != "")
-            {
-                temp = double.Parse(output);
-                output = "";
-                operation = name;
-                MathOp();
-                resultGiven = false;
-            }
+            CalcFunctions.MathOperation(name, value, this);
         }
 
         private void EqualsBtn_Click(object sender, RoutedEventArgs e)
         {
-            switch (operation)
-            {
-                case "PlusBtn":
-                    CalcFunctions.DoOperation(temp + double.Parse(output)), this;
-                    break;
-
-                case "MinusBtn":
-                    OperationBtn(temp - double.Parse(output));
-                    break;
-
-                case "MultiplyBtn":
-                    OperationBtn(temp * double.Parse(output));
-                    break;
-
-                case "DivideBtn":
-                    OperationBtn(temp / double.Parse(output));
-                    break;
-            }
-            resultGiven = true;
+            CalcFunctions.GetResult(this);
         }
         private void DragBorder_MouseDown(object sender, MouseButtonEventArgs e) { if (e.LeftButton == MouseButtonState.Pressed) DragMove(); }
 
@@ -127,14 +66,6 @@ namespace GingerBreadCalculator
             OutputTextBlock.Text = _text;
         }
 
-        public void Clear()
-        {
-            output = "";
-            temp = 0;
-            OutputTextBlock.Text = output;
-            operationOutput = "";
-            OperationTextBlock.Text = operationOutput;
-        }
 
         public void OperationOutput(string _text)
         {

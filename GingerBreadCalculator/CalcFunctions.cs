@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace GingerBreadCalculator
 {
-    public partial class CalcFunctions
+    public static class CalcFunctions
     {
         public static string operationOutput = "";
         public static string output = "";
@@ -30,7 +30,7 @@ namespace GingerBreadCalculator
             }
             else
             {
-                _windowInterface.Clear();
+                Clear(_windowInterface);
                 output = value.ToString();
                 resultGiven = false;
             }
@@ -38,7 +38,7 @@ namespace GingerBreadCalculator
 
             if (name == "ClearBtn")
             {
-                _windowInterface.Clear();
+                Clear(_windowInterface);
             }
 
             if (output == "0")
@@ -73,6 +73,38 @@ namespace GingerBreadCalculator
             _windowInterface.OperationOutput(operationOutput);
             output = _outputTemp.ToString();
             _windowInterface.Output(output);
+        }
+
+        public static void GetResult(IWindowInterface _windowInterface)
+        {
+            switch (operation)
+            {
+                case "PlusBtn":
+                    DoOperation((temp + double.Parse(output)), _windowInterface);
+                    break;
+
+                case "MinusBtn":
+                    DoOperation((temp - double.Parse(output)), _windowInterface);
+                    break;
+
+                case "MultiplyBtn":
+                    DoOperation((temp * double.Parse(output)), _windowInterface);
+                    break;
+
+                case "DivideBtn":
+                    DoOperation((temp / double.Parse(output)), _windowInterface);
+                    break;
+            }
+            resultGiven = true;
+        }
+
+        public static void Clear(IWindowInterface _windowInterface)
+        {
+            output = "";
+            temp = 0;
+            _windowInterface.Output(output);
+            operationOutput = "";
+            _windowInterface.OperationOutput(operationOutput);
         }
     }
 }
