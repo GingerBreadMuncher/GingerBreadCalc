@@ -34,8 +34,8 @@ namespace GingerBreadCalculator
             CalcFunctions.MathOperation(((Button)sender).Name, ((Button)sender).Content.ToString(), this);
 
 
-        private void EqualsBtn_Click(object sender, RoutedEventArgs e) =>
-            CalcFunctions.GetResult(this);
+        private void EqualsBtn_Click(object sender, RoutedEventArgs e) => CalcFunctions.GetResult(this);
+
         private void DragBorder_MouseDown(object sender, MouseButtonEventArgs e) { if (e.LeftButton == MouseButtonState.Pressed) DragMove(); }
 
         private void CloseApp_Click(object sender, RoutedEventArgs e) => Application.Current.Shutdown();
@@ -48,11 +48,9 @@ namespace GingerBreadCalculator
         #endregion
 
 
-        public void Output(string _text) =>
-            OutputTextBlock.Text = _text;
+        public void Output(string _text) => OutputTextBlock.Text = _text;
 
 
-        public void OperationOutput(string _text) =>
-            OperationTextBlock.Text = _text;
+        public void OperationOutput(string _text) => OperationTextBlock.Text = _text;
     }
 }
