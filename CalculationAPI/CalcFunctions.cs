@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows;
-
-namespace GingerBreadCalculator
+﻿
+namespace CalculationAPI
 {
     public static class CalcFunctions
     {
-        public static string operationOutput, output, operation, lastOperation = "";
-        public static double temp = 0;
-        public static bool resultGiven = false;
+        public static string operationOutput { get; private set; } = "";
+        public static string output { get; private set; } = "";
+        public static string operation { get; private set; } = "";
+        public static string lastOperation { get; private set; } = "";
+        public static double temp { get; private set; } = 0;
+        public static bool resultGiven { get; private set; } = false;
 
         public static void SelectNumber(string _name, string _value, IWindowInterface _windowInterface)
         {
