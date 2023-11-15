@@ -22,6 +22,7 @@ namespace GingerBreadCalculator_Console
         {
             public void Action()
             {
+                CalcFunctions.consoleOutput = true;
                 Console.WriteLine("Enter first number:");
                 double i = double.Parse(Console.ReadLine());
                 Console.WriteLine("Enter operation sign:");
@@ -31,7 +32,8 @@ namespace GingerBreadCalculator_Console
 
                 CalcFunctions.SelectNumber("", i.ToString(), this);
                 CalcFunctions.MathOperation(GetBtnName(sign), sign, this);
-                CalcFunctions.SelectNumber("", i.ToString(), this);
+                CalcFunctions.SelectNumber("", j.ToString(), this);
+                Console.WriteLine("And the result is:");
                 CalcFunctions.GetResult(this);
                 Console.WriteLine("\n");
             }
@@ -40,7 +42,7 @@ namespace GingerBreadCalculator_Console
             {
                 if (s == "+") return "PlusBtn";
                 if (s == "-") return "MinusBtn";
-                if (s == "*") return "MultyplyBtn";
+                if (s == "*") return "MultiplyBtn";
                 if (s == "/") return "DivideBtn";
                 return "";
             }
